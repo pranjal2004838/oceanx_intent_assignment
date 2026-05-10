@@ -34,6 +34,7 @@ class OrdersViewModel : ViewModel() {
             OrderStatus.PENDING -> "Pending"
             OrderStatus.CONFIRMED -> "Confirmed"
             OrderStatus.PREPARING -> "Preparing"
+            OrderStatus.PACKED -> "Packed"
             OrderStatus.ON_THE_WAY -> "On the Way"
             OrderStatus.DELIVERED -> "Delivered"
             OrderStatus.CANCELLED -> "Cancelled"
@@ -45,8 +46,9 @@ class OrdersViewModel : ViewModel() {
             OrderStatus.PENDING -> "⏳"
             OrderStatus.CONFIRMED -> "✅"
             OrderStatus.PREPARING -> "👨‍🍳"
+            OrderStatus.PACKED -> "📦"
             OrderStatus.ON_THE_WAY -> "🚗"
-            OrderStatus.DELIVERED -> "📦"
+            OrderStatus.DELIVERED -> "✔️"
             OrderStatus.CANCELLED -> "❌"
         }
     }

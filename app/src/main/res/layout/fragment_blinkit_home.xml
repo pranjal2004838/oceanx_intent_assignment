@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- ============ DELIVERY ETA BANNER (Speed-First Feature) ============ -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_12"
+        app:cardCornerRadius="@dimen/product_card_corner"
+        app:cardBackgroundColor="#FFE082"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/spacing_16">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/eta_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery in 8 mins"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold"
+                    android:textColor="#212121" />
+
+                <TextView
+                    android:id="@+id/delivery_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="123 Main Street, City"
+                    android:textSize="@dimen/text_size_12"
+                    android:textColor="#555555"
+                    android:layout_marginTop="@dimen/spacing_4" />
+
+            </LinearLayout>
+
+            <Button
+            android:id="@+id/change_address_blank_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change"
+                android:textColor="@color/primary" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ============ STICKY SEARCH BAR ============ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_8"
+        android:background="@color/surface"
+        android:elevation="2dp">
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:hint="Search milk, bread, etc..."
+            android:background="@drawable/edit_text_bg"
+            android:paddingStart="@dimen/spacing_16"
+            android:paddingEnd="@dimen/spacing_16"
+            android:inputType="text"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="@dimen/spacing_8"
+            android:layout_margin="@dimen/spacing_4" />
+
+        <ImageButton
+            android:id="@+id/filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Filter"
+            android:layout_margin="@dimen/spacing_8" />
+
+    </LinearLayout>
+
+    <!-- ============ MAIN CONTENT (SCROLLABLE) ============ -->
+    <NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ============ PERSONALIZED BANNERS ============ -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/banners_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="@dimen/spacing_8"
+                android:paddingVertical="@dimen/spacing_12"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <!-- ============ CATEGORY GRID (Speed-first) ============ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shop by Category"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingTop="@dimen/spacing_12"
+                android:paddingBottom="@dimen/spacing_8" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="@dimen/spacing_8"
+                android:paddingBottom="@dimen/spacing_12"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <!-- ============ FLASH SALES / TRENDING ============ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/spacing_16"
+                android:paddingVertical="@dimen/spacing_8">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="⚡ Flash Sale"
+                    android:textSize="@dimen/text_size_16"
+                    android:textStyle="bold"
+                    android:textColor="@color/discount_color" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/view_all_flash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_size_12"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    app:backgroundTint="@color/secondary" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/flash_sale_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="@dimen/spacing_12"
+                android:paddingBottom="@dimen/spacing_16"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <!-- ============ ALL PRODUCTS (GRID) ============ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Products"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingTop="@dimen/spacing_12"
+                android:paddingBottom="@dimen/spacing_8" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/products_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="@dimen/spacing_8"
+                android:paddingBottom="@dimen/spacing_16"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
+        </LinearLayout>
+
+    </NestedScrollView>
+
+    <!-- ============ STICKY CART BUTTON (Speed-First CTA) ============ -->
+    <LinearLayout
+        android:id="@+id/sticky_cart_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_12"
+        android:background="@color/surface"
+        android:elevation="8dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cart_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 items"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/text_secondary" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cart_savings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You saved ₹120"
+                    android:textSize="@dimen/text_size_12"
+                    android:textColor="@color/success"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cart_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" • ₹480"
+                    android:textSize="@dimen/text_size_14"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    android:layout_marginStart="@dimen/spacing_8" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/view_cart_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:text="View Cart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="@dimen/product_card_corner" />
+
+    </LinearLayout>
+
+</LinearLayout>
