@@ -8,16 +8,23 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.oceanx.grocery.R
+import com.oceanx.grocery.data.models.CartItem
 import com.oceanx.grocery.data.models.Order
+import com.oceanx.grocery.data.viewmodel.CartViewModel
 import com.oceanx.grocery.data.viewmodel.CheckoutViewModel
 import com.oceanx.grocery.databinding.FragmentCheckoutBinding
+import com.oceanx.grocery.ui.adapters.CartAdapter
+import com.oceanx.grocery.ui.adapters.CartAdapterListener
 import com.oceanx.grocery.ui.fragments.HomeFragment
 
-class CheckoutFragment : Fragment() {
+class CheckoutFragment : Fragment(), CartAdapterListener {
 
     private lateinit var binding: FragmentCheckoutBinding
     private lateinit var checkoutViewModel: CheckoutViewModel
+    private lateinit var cartViewModel: CartViewModel
+    private var checkoutAdapter: CartAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +39,7 @@ class CheckoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         checkoutViewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
+        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
 
         setupUI()
         observeData()
@@ -42,10 +50,30 @@ class CheckoutFragment : Fragment() {
         binding.apply {
             deliveryAddressInput.setText(checkoutViewModel.deliveryAddress.value ?: "")
             paymentSpinner.setSelection(0) // Default Credit Card
+            
+            // Setup checkout items recycler
+            checkoutItemsRecycler.layoutManager = LinearLayoutManager(requireContext())
+            checkoutItemsRecycler.setHasFixedSize(false)
+            
+            if (checkoutAdapter == null) {
+                checkoutAdapter = CartAdapter(this@CheckoutFragment)
+                checkoutItemsRecycler.adapter = checkoutAdapter
+            }
         }
     }
 
     private fun observeData() {
+        // Observe cart items and populate the checkout recycler
+        cartViewModel.cart.observe(viewLifecycleOwner) { items ->
+            checkoutAdapter?.submitList(items)
+        }
+
+        // Observe cart total
+        cartViewModel.cartTotal.observe(viewLifecycleOwner) { total ->
+            binding.subtotalAmount.text = "₹${total.toInt()}"
+            updateOrderTotal()
+        }
+
         checkoutViewModel.checkoutSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
                 val order = checkoutViewModel.currentOrder.value
@@ -73,7 +101,15 @@ class CheckoutFragment : Fragment() {
             } else {
                 binding.discountInfo.visibility = View.GONE
             }
+            updateOrderTotal()
         }
+    }
+
+    private fun updateOrderTotal() {
+        val subtotal = cartViewModel.cartTotal.value ?: 0.0
+        val discount = checkoutViewModel.discountAmount.value ?: 0.0
+        val finalTotal = if (subtotal > discount) subtotal - discount else subtotal
+        binding.orderTotalAmount.text = "₹${finalTotal.toInt()}"
     }
 
     private fun setupListeners() {
@@ -150,5 +186,13 @@ class CheckoutFragment : Fragment() {
                     .commit()
             }
         }
+    }
+
+    override fun onRemove(item: CartItem) {
+        cartViewModel.removeItem(item.product.id)
+    }
+
+    override fun onQuantityChanged(item: CartItem, newQuantity: Int) {
+        cartViewModel.updateQuantity(item.product.id, newQuantity)
     }
 }

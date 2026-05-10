@@ -2,6 +2,8 @@ package com.oceanx.grocery.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.oceanx.grocery.R
 import com.oceanx.grocery.data.models.CartItem
@@ -13,9 +15,8 @@ interface CartAdapterListener {
 }
 
 class CartAdapter(
-    private val items: List<CartItem>,
     private val listener: CartAdapterListener
-) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+) : ListAdapter<CartItem, CartAdapter.CartViewHolder>(CartItemDiffCallback()) {
 
     inner class CartViewHolder(private val binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -54,8 +55,16 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
+    }
+}
+
+class CartItemDiffCallback : DiffUtil.ItemCallback<CartItem>() {
+    override fun areItemsTheSame(oldItem: CartItem, newItem: CartItem): Boolean {
+        return oldItem.product.id == newItem.product.id
     }
 
-    override fun getItemCount() = items.size
+    override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean {
+        return oldItem == newItem
+    }
 }

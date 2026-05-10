@@ -49,6 +49,11 @@ class CartFragment : Fragment(), CartAdapterListener {
     }
 
     private fun observeData() {
+        if (cartAdapter == null) {
+            cartAdapter = CartAdapter(this)
+            binding.cartRecycler.adapter = cartAdapter
+        }
+
         cartViewModel.cart.observe(viewLifecycleOwner) { items ->
             if (items.isEmpty()) {
                 binding.emptyCart.visibility = View.VISIBLE
@@ -56,8 +61,7 @@ class CartFragment : Fragment(), CartAdapterListener {
             } else {
                 binding.emptyCart.visibility = View.GONE
                 binding.cartContainer.visibility = View.VISIBLE
-                cartAdapter = CartAdapter(items, this)
-                binding.cartRecycler.adapter = cartAdapter
+                cartAdapter?.submitList(items)
             }
         }
 
