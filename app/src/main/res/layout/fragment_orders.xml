@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📦"
+            android:textSize="64sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_orders"
+            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="@dimen/spacing_16" />
+
+    </LinearLayout>
+
+    <!-- Orders Content -->
+    <ScrollView
+        android:id="@+id/orders_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_16">
+
+            <!-- Active Orders Section -->
+            <LinearLayout
+                android:id="@+id/active_orders_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/active_orders"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="@dimen/spacing_12" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/active_orders_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_24"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/no_active_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No active orders"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="@dimen/spacing_24"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- Past Orders Section -->
+            <LinearLayout
+                android:id="@+id/past_orders_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/past_orders"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="@dimen/spacing_12" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/past_orders_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/no_past_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No past orders"
+                    android:textColor="@color/text_secondary"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

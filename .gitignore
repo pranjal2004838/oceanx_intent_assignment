@@ -1,0 +1,27 @@
+# Build outputs
+build/
+.gradle/
+app/build/
+*.apk
+*.aab
+
+# Android SDK & Emulator
+android-sdk/
+emulator/
+platform-tools/
+platform-tools.zip
+cmdline-tools.zip
+
+# Local files
+local.properties
+gradle.properties
+
+# IDE
+.idea/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+*.log
