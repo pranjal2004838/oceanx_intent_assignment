@@ -50,6 +50,8 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
         binding.apply {
             deliveryAddressInput.setText(checkoutViewModel.deliveryAddress.value ?: "")
             paymentSpinner.setSelection(0) // Default Credit Card
+            subtotalAmount.text = "₹0"
+            orderTotalAmount.text = "₹0"
             
             // Setup checkout items recycler
             checkoutItemsRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -142,6 +144,13 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+
+            locationDemoBtn.setOnClickListener {
+                val demoLocation = "123 Main Street, City (GPS demo)"
+                deliveryAddressInput.setText(demoLocation)
+                checkoutViewModel.setDeliveryAddress(demoLocation)
+                Toast.makeText(requireContext(), "Location fetched (demo)", Toast.LENGTH_SHORT).show()
             }
 
             placeOrderBtn.setOnClickListener {

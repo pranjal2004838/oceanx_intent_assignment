@@ -10,11 +10,14 @@ import com.oceanx.grocery.databinding.ItemProductBinding
 interface ProductAdapterListener {
     fun onAddToCart(product: Product)
     fun onProductClick(product: Product)
+    fun onIncreaseQuantity(product: Product)
+    fun onDecreaseQuantity(product: Product)
 }
 
 class ProductAdapter(
     private val products: List<Product>,
-    private val listener: ProductAdapterListener
+    private val listener: ProductAdapterListener,
+    private val cartQuantities: Map<String, Int> = emptyMap()
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
@@ -26,6 +29,7 @@ class ProductAdapter(
                 productPrice.text = "₹${product.price.toInt()}"
                 productUnit.text = product.unit
                 productRating.text = "⭐ ${product.rating}"
+                val quantity = cartQuantities[product.id] ?: 0
 
                 // Show discount if available
                 if (product.discount != null) {
@@ -47,10 +51,22 @@ class ProductAdapter(
                     addToCartBtn.text = itemView.context.getString(R.string.add_to_cart)
                 }
 
-                // Click listeners
-                addToCartBtn.setOnClickListener {
-                    if (product.inStock) {
-                        listener.onAddToCart(product)
+                if (product.inStock) {
+                    if (quantity > 0) {
+                        addToCartBtn.text = quantity.toString()
+                        addToCartBtn.setOnClickListener {
+                            listener.onIncreaseQuantity(product)
+                        }
+                        addToCartBtn.setOnLongClickListener {
+                            listener.onDecreaseQuantity(product)
+                            true
+                        }
+                    } else {
+                        addToCartBtn.text = itemView.context.getString(R.string.add_to_cart)
+                        addToCartBtn.setOnClickListener {
+                            listener.onAddToCart(product)
+                        }
+                        addToCartBtn.setOnLongClickListener(null)
                     }
                 }
 

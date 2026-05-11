@@ -204,6 +204,16 @@
                         android:textColor="@color/text_primary"
                         android:textColorHint="@color/text_hint" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/location_demo_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_12"
+                        android:text="Fetch Current Location (Demo)"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/secondary"
+                        app:cornerRadius="@dimen/product_card_corner" />
+
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

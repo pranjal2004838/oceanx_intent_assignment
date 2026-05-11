@@ -12,15 +12,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.oceanx.grocery.R
 import com.oceanx.grocery.data.models.Product
 import com.oceanx.grocery.data.viewmodel.HomeViewModel
+import com.oceanx.grocery.data.viewmodel.CartViewModel
 import com.oceanx.grocery.databinding.FragmentHomeBinding
 import com.oceanx.grocery.ui.adapters.CategoryAdapter
 import com.oceanx.grocery.ui.adapters.ProductAdapter
 import com.oceanx.grocery.ui.adapters.ProductAdapterListener
+import com.oceanx.grocery.ui.fragments.CartFragment
+import com.oceanx.grocery.ui.fragments.CheckoutFragment
 
 class HomeFragment : Fragment(), ProductAdapterListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var cartViewModel: CartViewModel
     private var productAdapter: ProductAdapter? = null
 
     override fun onCreateView(
@@ -36,10 +40,12 @@ class HomeFragment : Fragment(), ProductAdapterListener {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity()).get(CartViewModel::class.java)
 
         setupRecyclerViews()
         observeData()
         setupSearchView()
+        setupBlinkitDemoHeader()
     }
 
     private fun setupRecyclerViews() {
@@ -57,6 +63,22 @@ class HomeFragment : Fragment(), ProductAdapterListener {
     }
 
     private fun observeData() {
+        cartViewModel.cart.observe(viewLifecycleOwner) { cartItems ->
+            val quantities = cartItems.associate { it.product.id to it.quantity }
+            val products = viewModel.filteredProducts.value ?: emptyList()
+            productAdapter = ProductAdapter(products, this, quantities)
+            binding.productsRecycler.adapter = productAdapter
+
+            val count = cartItems.sumOf { it.quantity }
+            val total = cartItems.sumOf { it.totalPrice }
+            binding.emptyState.visibility = if (products.isEmpty()) View.VISIBLE else View.GONE
+            binding.loadingIndicator.visibility = View.GONE
+            binding.root.findViewById<View>(R.id.cart_summary_container)?.visibility = if (count > 0) View.VISIBLE else View.GONE
+            binding.root.findViewById<android.widget.TextView>(R.id.cart_items_count)?.text = "$count items"
+            binding.root.findViewById<android.widget.TextView>(R.id.cart_total_amount)?.text = "₹${total.toInt()}"
+            binding.root.findViewById<android.widget.TextView>(R.id.delivery_eta_text)?.text = "Delivery in 8 mins"
+        }
+
         viewModel.filteredProducts.observe(viewLifecycleOwner) { products ->
             if (products.isEmpty()) {
                 binding.emptyState.visibility = View.VISIBLE
@@ -64,7 +86,8 @@ class HomeFragment : Fragment(), ProductAdapterListener {
             } else {
                 binding.emptyState.visibility = View.GONE
                 binding.productsRecycler.visibility = View.VISIBLE
-                productAdapter = ProductAdapter(products, this)
+                val quantities = cartViewModel.cart.value.orEmpty().associate { it.product.id to it.quantity }
+                productAdapter = ProductAdapter(products, this, quantities)
                 binding.productsRecycler.adapter = productAdapter
             }
         }
@@ -109,9 +132,42 @@ class HomeFragment : Fragment(), ProductAdapterListener {
         })
     }
 
+    private fun setupBlinkitDemoHeader() {
+        binding.root.findViewById<android.widget.TextView>(R.id.delivery_eta_text)?.text = "Delivery in 8 mins"
+        binding.root.findViewById<android.widget.Button>(R.id.location_demo_btn)?.setOnClickListener {
+            Toast.makeText(requireContext(), "Using GPS: 123 Main Street (demo)", Toast.LENGTH_SHORT).show()
+        }
+        binding.root.findViewById<android.widget.Button>(R.id.view_cart_demo_btn)?.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, CartFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        binding.root.findViewById<android.widget.Button>(R.id.go_checkout_btn)?.setOnClickListener {
+            if (!cartViewModel.isCartEmpty()) {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, CheckoutFragment())
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                Toast.makeText(requireContext(), "Add items to cart first", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onAddToCart(product: Product) {
         viewModel.addToCart(product)
         Toast.makeText(requireContext(), "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onIncreaseQuantity(product: Product) {
+        viewModel.addToCart(product)
+    }
+
+    override fun onDecreaseQuantity(product: Product) {
+        cartViewModel.cart.value?.firstOrNull { it.product.id == product.id }?.let { item ->
+            cartViewModel.updateQuantity(product.id, item.quantity - 1)
+        }
     }
 
     override fun onProductClick(product: Product) {
