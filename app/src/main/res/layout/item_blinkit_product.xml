@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"
-                android:text="⚡ FLASH"
+                android:text="FLASH"
                 android:textSize="@dimen/text_size_10"
                 android:padding="@dimen/spacing_4"
                 android:minWidth="0dp"
@@ -95,7 +95,7 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⭐ 4.8"
+                android:text="4.8"
                 android:textSize="@dimen/text_size_11"
                 android:textColor="@color/text_secondary" />
 

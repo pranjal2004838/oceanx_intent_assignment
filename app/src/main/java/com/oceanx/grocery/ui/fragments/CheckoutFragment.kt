@@ -48,6 +48,9 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
 
     private fun setupUI() {
         binding.apply {
+            checkoutHeader.visibility = View.VISIBLE
+            checkoutScroll.visibility = View.VISIBLE
+            checkoutFooter.visibility = View.VISIBLE
             contentContainer.visibility = View.VISIBLE
             confirmationContainer.visibility = View.GONE
             checkoutEmptyState.visibility = View.GONE
@@ -184,7 +187,9 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
 
     private fun showOrderConfirmation(order: Order) {
         binding.apply {
-            contentContainer.visibility = View.GONE
+            checkoutHeader.visibility = View.GONE
+            checkoutScroll.visibility = View.GONE
+            checkoutFooter.visibility = View.GONE
             confirmationContainer.visibility = View.VISIBLE
 
             confirmationOrderId.text = "Order ID: ${order.orderId}"

@@ -51,7 +51,7 @@
                 android:id="@+id/status_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✅"
+                android:text="SUCCESS"
                 android:textSize="32sp"
                 android:layout_marginStart="@dimen/spacing_12" />
 

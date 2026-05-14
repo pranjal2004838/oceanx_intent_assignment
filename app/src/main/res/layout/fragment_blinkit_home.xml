@@ -154,7 +154,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="⚡ Flash Sale"
+                    android:text="Flash Sale"
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold"
                     android:textColor="@color/discount_color" />
