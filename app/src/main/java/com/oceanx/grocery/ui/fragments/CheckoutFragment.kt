@@ -48,6 +48,9 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
 
     private fun setupUI() {
         binding.apply {
+            contentContainer.visibility = View.VISIBLE
+            confirmationContainer.visibility = View.GONE
+            checkoutEmptyState.visibility = View.GONE
             deliveryAddressInput.setText(checkoutViewModel.deliveryAddress.value ?: "")
             paymentSpinner.setSelection(0) // Default Credit Card
             subtotalAmount.text = "₹0"
@@ -59,15 +62,19 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
             
             if (checkoutAdapter == null) {
                 checkoutAdapter = CartAdapter(this@CheckoutFragment)
-                checkoutItemsRecycler.adapter = checkoutAdapter
             }
+            checkoutItemsRecycler.adapter = checkoutAdapter
         }
     }
 
     private fun observeData() {
         // Observe cart items and populate the checkout recycler
         cartViewModel.cart.observe(viewLifecycleOwner) { items ->
-            checkoutAdapter?.submitList(items)
+            val hasItems = items.isNotEmpty()
+            binding.checkoutEmptyState.visibility = if (hasItems) View.GONE else View.VISIBLE
+            binding.checkoutItemsRecycler.visibility = if (hasItems) View.VISIBLE else View.GONE
+            binding.placeOrderBtn.isEnabled = hasItems
+            checkoutAdapter?.submitList(items.toList())
         }
 
         // Observe cart total
@@ -86,7 +93,8 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
         }
 
         checkoutViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.placeOrderBtn.isEnabled = !isLoading
+            val hasItems = cartViewModel.cart.value?.isNotEmpty() == true
+            binding.placeOrderBtn.isEnabled = !isLoading && hasItems
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 

@@ -51,8 +51,8 @@ class CartFragment : Fragment(), CartAdapterListener {
     private fun observeData() {
         if (cartAdapter == null) {
             cartAdapter = CartAdapter(this)
-            binding.cartRecycler.adapter = cartAdapter
         }
+        binding.cartRecycler.adapter = cartAdapter
 
         cartViewModel.cart.observe(viewLifecycleOwner) { items ->
             if (items.isEmpty()) {
