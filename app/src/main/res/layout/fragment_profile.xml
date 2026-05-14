@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_16"
+        android:background="@color/surface"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Profile"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_16">
+
+            <!-- User Info Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_16"
+                app:cardCornerRadius="@dimen/product_card_corner"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_16">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:background="@drawable/quantity_bg"
+                        android:contentDescription="Profile Picture" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="John Doe"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 9876543210"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary" />
+                        
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="johndoe@example.com"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Options List -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/product_card_corner"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/btn_past_orders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Past Orders"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_menu_recent_history"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/text_primary" />
+                        
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+
+                    <TextView
+                        android:id="@+id/btn_wallets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wallets &amp; Payments"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_menu_gallery"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/text_primary" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+                    
+                    <TextView
+                        android:id="@+id/btn_saved_addresses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Saved Addresses"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_dialog_map"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/text_primary" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+
+                    <TextView
+                        android:id="@+id/btn_help_center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Help Center"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_menu_help"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/text_primary" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+
+                    <TextView
+                        android:id="@+id/btn_customer_support"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Support"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_dialog_email"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/text_primary" />
+                        
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" />
+
+                    <TextView
+                        android:id="@+id/btn_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
+                        android:background="?attr/selectableItemBackground"
+                        android:textColor="@color/error" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="App Version 1.0.0"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

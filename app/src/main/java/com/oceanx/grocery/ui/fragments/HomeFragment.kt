@@ -134,16 +134,8 @@ class HomeFragment : Fragment(), ProductAdapterListener {
 
     private fun setupBlinkitDemoHeader() {
         binding.root.findViewById<android.widget.TextView>(R.id.delivery_eta_text)?.text = "Delivery in 8 mins"
-        binding.root.findViewById<android.widget.Button>(R.id.location_demo_btn)?.setOnClickListener {
-            Toast.makeText(requireContext(), "Using GPS: 123 Main Street (demo)", Toast.LENGTH_SHORT).show()
-        }
-        binding.root.findViewById<android.widget.Button>(R.id.view_cart_demo_btn)?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CartFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-        binding.root.findViewById<android.widget.Button>(R.id.go_checkout_btn)?.setOnClickListener {
+        
+        binding.root.findViewById<android.view.View>(R.id.cart_summary_container)?.setOnClickListener {
             if (!cartViewModel.isCartEmpty()) {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, CheckoutFragment())

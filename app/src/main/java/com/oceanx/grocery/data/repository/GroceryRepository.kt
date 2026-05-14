@@ -71,6 +71,7 @@ class GroceryRepository {
             // Vegetables
             Product(
                 id = "p1",
+                imageUrl = "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop",
                 name = "Fresh Tomatoes",
                 category = "Vegetables",
                 price = 40.0,
@@ -81,6 +82,7 @@ class GroceryRepository {
             ),
             Product(
                 id = "p2",
+                imageUrl = "https://images.unsplash.com/photo-1587049352847-4d4b12405451?q=80&w=400&auto=format&fit=crop",
                 name = "Onions",
                 category = "Vegetables",
                 price = 25.0,
@@ -90,6 +92,7 @@ class GroceryRepository {
             ),
             Product(
                 id = "p3",
+                imageUrl = "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=400&auto=format&fit=crop",
                 name = "Carrots",
                 category = "Vegetables",
                 price = 35.0,
@@ -100,6 +103,7 @@ class GroceryRepository {
             ),
             Product(
                 id = "p4",
+                imageUrl = "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=400&auto=format&fit=crop",
                 name = "Potatoes",
                 category = "Vegetables",
                 price = 30.0,
@@ -121,6 +125,7 @@ class GroceryRepository {
             // Fruits
             Product(
                 id = "p6",
+                imageUrl = "https://images.unsplash.com/photo-1560806887-1e4cd0b6fac6?q=80&w=400&auto=format&fit=crop",
                 name = "Apples",
                 category = "Fruits",
                 price = 80.0,
@@ -130,6 +135,7 @@ class GroceryRepository {
             ),
             Product(
                 id = "p7",
+                imageUrl = "https://images.unsplash.com/photo-1481349518771-20055b2a7b24?q=80&w=400&auto=format&fit=crop",
                 name = "Bananas",
                 category = "Fruits",
                 price = 50.0,
@@ -160,6 +166,7 @@ class GroceryRepository {
             // Dairy
             Product(
                 id = "p10",
+                imageUrl = "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400&auto=format&fit=crop",
                 name = "Whole Milk",
                 category = "Dairy",
                 price = 60.0,
@@ -199,6 +206,7 @@ class GroceryRepository {
             // Snacks
             Product(
                 id = "p14",
+                imageUrl = "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?q=80&w=400&auto=format&fit=crop",
                 name = "Chips",
                 category = "Snacks",
                 price = 30.0,
@@ -238,6 +246,7 @@ class GroceryRepository {
             // Beverages
             Product(
                 id = "p18",
+                imageUrl = "https://images.unsplash.com/photo-1600271886742-f049cd451b02?q=80&w=400&auto=format&fit=crop",
                 name = "Orange Juice",
                 category = "Beverages",
                 price = 80.0,

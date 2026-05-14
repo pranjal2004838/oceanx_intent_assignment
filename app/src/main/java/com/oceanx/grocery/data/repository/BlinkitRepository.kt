@@ -140,6 +140,7 @@ class BlinkitRepository {
             // VEGETABLES - Speed commerce favorites
             Product(
                 id = "p1",
+                imageUrl = "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop",
                 name = "Fresh Tomatoes",
                 category = "Vegetables",
                 price = 40.0,
@@ -153,6 +154,7 @@ class BlinkitRepository {
             ),
             Product(
                 id = "p2",
+                imageUrl = "https://images.unsplash.com/photo-1587049352847-4d4b12405451?q=80&w=400&auto=format&fit=crop",
                 name = "Onions",
                 category = "Vegetables",
                 price = 25.0,
@@ -164,6 +166,7 @@ class BlinkitRepository {
             ),
             Product(
                 id = "p3",
+                imageUrl = "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=400&auto=format&fit=crop",
                 name = "Carrots",
                 category = "Vegetables",
                 price = 35.0,
@@ -178,6 +181,7 @@ class BlinkitRepository {
             // DAIRY - Time-sensitive purchases
             Product(
                 id = "p10",
+                imageUrl = "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400&auto=format&fit=crop",
                 name = "Whole Milk",
                 category = "Dairy",
                 price = 60.0,
@@ -703,7 +707,8 @@ class BlinkitRepository {
             Order(
                 orderId = "ORD001",
                 items = listOf(
-                    CartItem(Product(id = "p10", name = "Milk", category = "Dairy", price = 60.0), 2)
+                    CartItem(Product(id = "p10",
+                imageUrl = "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=400&auto=format&fit=crop", name = "Milk", category = "Dairy", price = 60.0), 2)
                 ),
                 totalAmount = 120.0,
                 status = OrderStatus.DELIVERED,
@@ -712,7 +717,8 @@ class BlinkitRepository {
             Order(
                 orderId = "ORD002",
                 items = listOf(
-                    CartItem(Product(id = "p1", name = "Tomatoes", category = "Vegetables", price = 40.0), 1)
+                    CartItem(Product(id = "p1",
+                imageUrl = "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop", name = "Tomatoes", category = "Vegetables", price = 40.0), 1)
                 ),
                 totalAmount = 40.0,
                 status = OrderStatus.DELIVERED,

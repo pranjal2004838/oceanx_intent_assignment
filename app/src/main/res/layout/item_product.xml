@@ -13,14 +13,22 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_12">
 
-        <!-- Product Image Area (Placeholder) -->
+        <!-- Product Image Area -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/product_image_height"
             android:background="@color/divider"
             android:layout_marginBottom="@dimen/spacing_12">
 
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Product Image" />
+
             <TextView
+                android:id="@+id/product_image_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

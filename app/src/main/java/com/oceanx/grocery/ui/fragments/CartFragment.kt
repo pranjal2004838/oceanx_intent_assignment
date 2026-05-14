@@ -34,7 +34,7 @@ class CartFragment : Fragment(), CartAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity()).get(CartViewModel::class.java)
 
         setupRecyclerView()
         observeData()

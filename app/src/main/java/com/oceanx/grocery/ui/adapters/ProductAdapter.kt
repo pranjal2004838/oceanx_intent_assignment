@@ -3,6 +3,7 @@ package com.oceanx.grocery.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.oceanx.grocery.R
 import com.oceanx.grocery.data.models.Product
 import com.oceanx.grocery.databinding.ItemProductBinding
@@ -30,6 +31,16 @@ class ProductAdapter(
                 productUnit.text = product.unit
                 productRating.text = "⭐ ${product.rating}"
                 val quantity = cartQuantities[product.id] ?: 0
+
+                if (product.imageUrl.isNotEmpty()) {
+                    productImagePlaceholder.visibility = android.view.View.GONE
+                    Glide.with(itemView.context)
+                        .load(product.imageUrl)
+                        .into(productImage)
+                } else {
+                    productImagePlaceholder.visibility = android.view.View.VISIBLE
+                    productImage.setImageDrawable(null)
+                }
 
                 // Show discount if available
                 if (product.discount != null) {

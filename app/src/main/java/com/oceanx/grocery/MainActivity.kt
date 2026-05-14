@@ -12,6 +12,7 @@ import com.oceanx.grocery.data.viewmodel.CartViewModel
 import com.oceanx.grocery.ui.fragments.CartFragment
 import com.oceanx.grocery.ui.fragments.HomeFragment
 import com.oceanx.grocery.ui.fragments.OrdersFragment
+import com.oceanx.grocery.ui.fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home -> HomeFragment()
                 R.id.nav_cart -> CartFragment()
                 R.id.nav_orders -> OrdersFragment()
+                R.id.nav_profile -> ProfileFragment()
                 else -> return@setOnItemSelectedListener false
             }
 

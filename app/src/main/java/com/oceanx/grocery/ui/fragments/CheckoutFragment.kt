@@ -38,8 +38,8 @@ class CheckoutFragment : Fragment(), CartAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkoutViewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        checkoutViewModel = ViewModelProvider(requireActivity()).get(CheckoutViewModel::class.java)
+        cartViewModel = ViewModelProvider(requireActivity()).get(CartViewModel::class.java)
 
         setupUI()
         observeData()
